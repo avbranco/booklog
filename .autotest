@@ -1,0 +1,6 @@
+unless ENV["RSPEC"]
+  PLATFORM = RUBY_PLATFORM unless defined? PLATFORM
+  #require "redgreen/autotest"
+end
+
+
