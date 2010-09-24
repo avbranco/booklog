@@ -2,10 +2,16 @@ require 'test_helper'
 
 class BooksControllerTest < ActionController::TestCase
   include Devise::TestHelpers
-   
+  
   setup do
     @book = books(:one)  
-  end
+    @user = User.create!(
+      :email => 'u...@test.com',
+      :password => 'user123',
+      :password_confirmation => 'user123'
+    ) 
+    sign_in @user
+  end 
 
   test "should get index" do
     get :index
@@ -14,10 +20,9 @@ class BooksControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new 
     assert_response :success
   end
-
   test "should create book" do
     assert_difference('Book.count') do
       post :create, :book => @book.attributes
@@ -28,7 +33,7 @@ class BooksControllerTest < ActionController::TestCase
 
   test "should show book" do
     get :show, :id => @book.to_param
-    assert_response :success
+    assert_response :success 
   end
 
   test "should get edit" do

@@ -1,6 +1,8 @@
 unless ENV["RSPEC"]
-  PLATFORM = RUBY_PLATFORM unless defined? PLATFORM
-  #require "redgreen/autotest"
+PLATFORM = RUBY_PLATFORM unless defined? PLATFORM
 end
+
+require 'test/unit/notify'
+require 'autotest/timestamp'
 
 

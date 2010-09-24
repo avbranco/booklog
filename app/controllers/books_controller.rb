@@ -7,14 +7,12 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @books }
+      format.xml  { render :xml => @books }        
     end
-  end
-
+  end  
 
   def show
     @book = Book.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @book }
@@ -30,7 +28,6 @@ class BooksController < ApplicationController
       format.xml  { render :xml => @book }
     end
   end
-
 
   def edit
     @book = Book.find(params[:id])
