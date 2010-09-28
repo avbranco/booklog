@@ -10,6 +10,11 @@
   <%= @book.author %>
 </p>
 
+<p>
+  <b>ISBN:</b>
+  <%= @book.isbn %>
+</p>
+
 <% if @book.image? %>
   <%= image_tag @book.image.url %>
   <br>
