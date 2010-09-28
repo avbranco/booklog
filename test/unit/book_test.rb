@@ -3,10 +3,10 @@ require 'test_helper'
 class BookTest < ActiveSupport::TestCase
   
   [:title, :author, :isbn].each do |attribute|
-    test "should not save book without #{attribute.to_s}" do
+    test "should not save book without #{attribute}" do
       book = books(:one)
-      book.send("#{attribute.to_s}=", nil)
-      assert !book.save, "Saved the book without #{attribute.to_s}"
+      book.send("#{attribute}=", nil)
+      assert !book.save, "Saved the book without #{attribute}"
     end
   end
   
