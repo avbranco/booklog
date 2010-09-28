@@ -1,6 +1,5 @@
 class Book < ActiveRecord::Base
   validates_presence_of :title, :author, :isbn
-  validates_numericality_of :isbn, :on => :create
   validate :length_of_isbn
   
   has_attached_file :image
