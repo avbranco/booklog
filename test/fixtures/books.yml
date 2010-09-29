@@ -2,3 +2,9 @@ one:
   title: Agile Web Development with Rails (3rd edition)
   author: Sam Ruby
   isbn: 9781934356166
+
+two:
+  title: The Ruby way
+  author: Hal Fulton
+  isbn: 0672328844
+  

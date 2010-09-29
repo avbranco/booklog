@@ -6,6 +6,7 @@ class BooksControllerTest < ActionController::TestCase
   setup do
     @book = books(:one)  
     @user = User.create!(
+      :id => 1,                   
       :email => 'u...@test.com',
       :password => 'user123',
       :password_confirmation => 'user123'

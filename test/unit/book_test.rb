@@ -2,7 +2,16 @@ require 'test_helper'
 
 class BookTest < ActiveSupport::TestCase
   
-  setup { @book = books(:one) }
+  setup { 
+    @book = books(:one) 
+    user = User.create!(
+      :id => 1,
+      :email => 'u...@test.com',
+      :password => 'user123',
+      :password_confirmation => 'user123'
+    ) 
+    @book.user = user
+  }
   
   [:title, :author, :isbn].each do |attribute|
     test "should not save book without #{attribute}" do
@@ -35,6 +44,11 @@ class BookTest < ActiveSupport::TestCase
   
   test "should not save book without an author, title and isbn" do
     assert !Book.new.save, "Saved the book wihout an author, title and isbn"
+  end
+  
+  test "should not sava a book without a user" do
+    book2 = books(:two)
+    assert !book2.save, "Saved the book without a user"
   end
   
 end
