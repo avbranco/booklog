@@ -24,6 +24,7 @@ class BooksControllerTest < ActionController::TestCase
     get :new 
     assert_response :success
   end
+  
   test "should create book" do
     assert_difference('Book.count') do
       post :create, :book => @book.attributes

@@ -10,7 +10,7 @@ class BookTest < ActiveSupport::TestCase
       :password => 'user123',
       :password_confirmation => 'user123'
     ) 
-    @book.user = user
+    @book.users[0] = user
   }
   
   [:title, :author, :isbn].each do |attribute|
@@ -46,9 +46,14 @@ class BookTest < ActiveSupport::TestCase
     assert !Book.new.save, "Saved the book wihout an author, title and isbn"
   end
   
-  test "should not sava a book without a user" do
+  test "should not save a book without a user" do
     book2 = books(:two)
     assert !book2.save, "Saved the book without a user"
   end
   
+  test "should save a book only if the isbn does not exist" do
+    books(:two).save    
+    assert !books(:three).save, "Saved a book with the same isbn"    
+  end
+ 
 end

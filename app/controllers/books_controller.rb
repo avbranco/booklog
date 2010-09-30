@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    @books = Book.where(:user_id => current_user.id)
+    @books = Book.find(:all)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @books }        
@@ -20,7 +20,6 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
-    @book.user =  current_user
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @book }
@@ -34,8 +33,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(params[:book])
-    @book.user =  current_user
-    respond_to do |format|
+    respond_to do |format|  
       if @book.save
         format.html { redirect_to(@book, :notice => 'Book was successfully created.') }
         format.xml  { render :xml => @book, :status => :created, :location => @book }
@@ -48,7 +46,6 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    @book.user = current_user
     respond_to do |format|
       if @book.update_attributes(params[:book])
         format.html { redirect_to(@book, :notice => 'Book was successfully updated.') }
