@@ -1,3 +1,7 @@
+<% content_for :scripts do %>
+  <%= javascript_include_tag 'fetch' %>
+<% end %>
+
 <%= form_for(@book, :html => { :multipart => true }) do |f| %>
   <% if @book.errors.any? %>
     <div id="error_explanation">
@@ -10,6 +14,23 @@
       </ul>
     </div>
   <% end %>
+  
+  <div class="field">
+    <%= f.label :isbn %><br />
+    <%= f.text_field :isbn %>
+    <br />
+    <%= f.label :isbn13 %><br />
+    <%= f.text_field :isbn13 %>
+    <br />
+    <%= link_to 'Fetch', fetch_books_url, :id => 'fetch' %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :image_url %><br />
+    <%= image_tag @book.image.url(:default), :id => 'preview' %>
+    <br />
+    <%= f.hidden_field :image_url %>
+  </div>
 
   <div class="field">
     <%= f.label :title %><br />
@@ -20,17 +41,6 @@
     <%= f.label :author %><br />
     <%= f.text_field :author %>
   </div>
-  
-  <div class="field">
-    <%= f.label :isbn %><br />
-    <%= f.text_field :isbn %>
-  </div>
-
-  <div class="field">
-    <%= f.label :image %><br />
-    <%= f.file_field :image %>
-  </div>
-
 
   <div class="actions">
     <%= f.submit %>

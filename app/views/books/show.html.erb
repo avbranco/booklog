@@ -1,25 +1,27 @@
-<p id="notice"><%= notice %></p>
+<p>
+  <%= image_tag @book.image.url(:default) %>
+</p>
 
 <p>
-  <b>Title:</b>
+  <b><%= Book.human_attribute_name :title %>:</b>
   <%= @book.title %>
 </p>
 
 <p>
-  <b>Author:</b>
+  <b><%= Book.human_attribute_name :author %>:</b>
   <%= @book.author %>
 </p>
 
 <p>
-  <b>ISBN:</b>
+  <b><%= Book.human_attribute_name :isbn %>:</b>
   <%= @book.isbn %>
 </p>
 
-<% if @book.image? %>
-  <%= image_tag @book.image.url %>
-  <br>
-  <%= link_to @book.image.url, @book.image.url %>
-<% end %>
+<p>
+  <b><%= Book.human_attribute_name :isbn13 %>:</b>
+  <%= @book.isbn13 %>
+</p>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<%= link_to 'Back', books_path %> |
+<%= link_to 'New Book', new_book_path %>

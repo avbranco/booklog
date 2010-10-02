@@ -1,29 +1,23 @@
+require 'open-uri'
+
 class BooksController < ApplicationController
+  respond_to :html, :js, :xml
   before_filter :authenticate_user!
   
   def index
-    @books = Book.find(:all)
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @books }        
-    end
+    @books = Book.all(:order => 'title')
+    respond_with @books
   end  
 
   def show
     @book = Book.find(params[:id])
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @book }
-    end
+    respond_with @book
   end
 
 
   def new
     @book = Book.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @book }
-    end
+    respond_with @book
   end
 
   def edit
@@ -33,37 +27,37 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(params[:book])
-    respond_to do |format|  
-      if @book.save
-        format.html { redirect_to(@book, :notice => 'Book was successfully created.') }
-        format.xml  { render :xml => @book, :status => :created, :location => @book }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @book.errors, :status => :unprocessable_entity }
-      end
-    end
+    @book.save
+    respond_with @book
   end
 
   def update
     @book = Book.find(params[:id])
-    respond_to do |format|
-      if @book.update_attributes(params[:book])
-        format.html { redirect_to(@book, :notice => 'Book was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @book.errors, :status => :unprocessable_entity }
-      end
-    end
+    @book.update_attributes(params[:book])
+    respond_with @book
   end
 
   def destroy
     @book = Book.find(params[:id])
     @book.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(books_url) }
-      format.xml  { head :ok }
+    respond_with @book
+  end
+  
+  def fetch
+    @book = Book.new()
+    doc = Nokogiri::HTML(open("http://search.barnesandnoble.com/books/product.aspx?ean=#{params[:isbn]}"))
+    title = doc.css(".tab-title-repeat h2").first
+    if title
+      flash[:notice] = ''
+      @book.title = title.content
+      @book.author = doc.css(".wgt-productTitle .nl a").first.content
+      @book.image_url = doc.css("#product-image img").first['src']
+      isbns = doc.css(".isbn-a")
+      @book.isbn13 = isbns.first.content
+      @book.isbn = isbns.last.content
+    else
+      flash[:notice] = 'Could not find book by isbn'
     end
+    respond_with @book
   end
 end

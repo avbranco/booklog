@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100930183404) do
+ActiveRecord::Schema.define(:version => 20100930223939) do
 
   create_table "books", :force => true do |t|
     t.string   "title"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(:version => 20100930183404) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "isbn"
+    t.string   "image_remote_url"
+    t.string   "isbn13"
   end
 
   add_index "books", ["isbn"], :name => "index_books_on_isbn"

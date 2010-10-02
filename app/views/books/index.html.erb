@@ -2,20 +2,22 @@
 
 <table>
   <tr>
-    <th>Title</th>
-    <th>Author</th>
-    <th>ISBN</th>
-    <th></th>
+    <th><%= Book.human_attribute_name :image %></th>
+    <th><%= Book.human_attribute_name :title %></th>
+    <th><%= Book.human_attribute_name :author %></th>
+    <th><%= Book.human_attribute_name :isbn %></th>
+    <th><%= Book.human_attribute_name :isbn13 %></th>
     <th></th>
     <th></th>
   </tr>
 
 <% @books.each do |book| %>
   <tr>
+    <td><%= link_to image_tag(book.image.url(:thumb)), book %></td>
     <td><%= book.title %></td>
     <td><%= book.author %></td>
     <td><%= book.isbn %></td>
-    <td><%= link_to 'Show', book %></td>
+    <td><%= book.isbn13 %></td>
     <td><%= link_to 'Edit', edit_book_path(book) %></td>
     <td><%= link_to 'Destroy', book, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

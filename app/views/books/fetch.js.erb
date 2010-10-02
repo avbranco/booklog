@@ -1,0 +1,11 @@
+$('#notice').html('<%= notice %>');
+$('#book_isbn').val('<%= @book.isbn %>');
+$('#book_isbn13').val('<%= @book.isbn13 %>');
+$('#book_title').val('<%= @book.title %>');
+$('#book_author').val('<%= @book.author %>');
+$('#book_image_url').val('<%= @book.image_url %>');
+<% if @book.image_url %>
+	$('#preview').attr('src', '<%= @book.image_url %>');
+<% else %>
+	$('#preview').attr('src', '/images/default/missing.png');
+<% end %>
