@@ -9,4 +9,5 @@ gem 'nokogiri'
 group :test do
   gem 'mocha'
   gem 'factory_girl_rails'
+  gem 'shoulda'
 end

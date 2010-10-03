@@ -10,7 +10,7 @@ class Book < ActiveRecord::Base
   has_many :users, :through => :readings
 
   validates_presence_of :title, :author, :isbn
-  validates_uniqueness_of :isbn, :isbn13
+  validates_uniqueness_of :isbn, :isbn13, :case_sensitive => false
   validates_length_of :isbn, :is => 10
   validates_length_of :isbn13, :is => 13
   before_validation :download_remote_image, :if => :image_url_provided?
