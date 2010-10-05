@@ -1,2 +1,14 @@
-<h1>Readings#index</h1>
-<p>Find me in app/views/readings/index.html.erb</p>
+<h1>My readings</h1>
+
+<table>
+
+<% @readings.each do |reading| %>
+  <tr>
+    <td><%= reading.book.title %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Reading', new_reading_path %>

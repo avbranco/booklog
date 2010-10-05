@@ -1,24 +1,12 @@
 require 'test_helper'
 
 class ReadingsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  
   test "should get index" do
     get :index
     assert_response :success
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should get create" do
-    get :create
-    assert_response :success
-  end
-
-  test "should get update" do
-    get :update
-    assert_response :success
+    assert_not_nil assigns(:reagings)
   end
 
 end

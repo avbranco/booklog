@@ -1,2 +1,13 @@
-<h1>Readings#new</h1>
-<p>Find me in app/views/readings/new.html.erb</p>
+<h1>New reading</h1>
+
+<table>
+<% Book.all.each do |book|%>
+  <tr>
+    <td> 
+      <%= image_tag(book.image.url(:thumb)) %>
+      <%= link_to 'My new reading', book_reading_path(book)%>
+    </td>
+ </tr>
+<% end %>
+</table>
+<%= link_to 'Back', readings_path %>
